@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-const text = prompt("Введите сообщение:");
+const text = prompt("Введите Ваше сообщение:");
 
 const Message = (props) => {
   return (
