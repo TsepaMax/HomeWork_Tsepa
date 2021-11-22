@@ -1,0 +1,9 @@
+:root {
+  --main-color: #2b5278;
+}
+
+.wrap-content {
+  display: flex;
+  margin: 0 30px;
+  padding-top: 10px;
+}
