@@ -1,45 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Input, InputAdornment } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { Message } from "./message";
 import { useStyles } from "./use-styles";
 
 export const MessageList = () => {
+  const { roomId } = useParams();
   const styles = useStyles();
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState({});
   const [value, setValue] = useState("");
 
   const ref = useRef(null);
 
-  useEffect(() => {
-    const lastMessages = messages[messages.length - 1];
-    let timerId = null;
-
-    if (messages.length && lastMessages.author !== "Bot") {
-      timerId = setTimeout(() => {
-        setMessages([
-          ...messages,
-          { author: "Bot", message: "hello from bot", date: new Date() },
-        ]);
-      }, 200);
-    }
-
-    return () => clearInterval(timerId);
-  }, [messages]);
-
-  useEffect(() => {
+  /*   useEffect(() => {
     ref.current?.focus();
-  }, []);
+  }, []); */
 
-  const sendMessage = () => {
+  function sendMessage() {
     if (value) {
-      setMessages([
+      setMessages({
         ...messages,
-        { author: "User", message: value, date: new Date() },
-      ]);
+        [roomId]: [
+          ...(messages[roomId] ?? []),
+          { author: "User", message: value, date: new Date() },
+        ],
+      });
       setValue("");
     }
-  };
+  }
 
   const handlePressInput = ({ code }) => {
     if (code === "Enter") {
@@ -47,9 +36,30 @@ export const MessageList = () => {
     }
   };
 
+  useEffect(() => {
+    const roomMessages = messages[roomId] ?? [];
+    const lastMessage = roomMessages[roomMessages.length - 1];
+    let timerId = null;
+
+    if (roomMessages.length && lastMessage.author !== "Bot") {
+      timerId = setTimeout(() => {
+        setMessages({
+          ...messages,
+          [roomId]: [
+            ...messages[roomId],
+            { author: "Bot", message: "Hello from bot", date: new Date() },
+          ],
+        });
+      }, 200);
+    }
+    return () => clearInterval(timerId);
+  }, [messages, roomId]);
+
+  const roomMessages = messages[roomId] ?? [];
+
   return (
     <div className={styles.wrapper}>
-      {messages.map((message, index) => (
+      {roomMessages.map((message, index) => (
         <Message message={message} key={index} />
       ))}
 
@@ -70,12 +80,3 @@ export const MessageList = () => {
     </div>
   );
 };
-
-// App.propTypes = {
-//   test1: PropTypes.number.isRequired,
-//   test2: PropTypes.string.isRequired,
-//   test3: PropTypes.func.isRequired,
-//   test4: PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//   }),
-// };

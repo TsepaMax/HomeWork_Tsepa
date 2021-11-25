@@ -4,15 +4,27 @@ export const useStyles = makeStyles((ctx) => {
   return {
     header: {
       display: "flex",
-      margin: "0 30px",
-      padding: "0 20px",
-      height: "50px",
-      background: "#2d95d6",
+      padding: "0 25px",
+      height: "5%",
+      minHeight: "50px",
+      background: "#099",
       alignItems: "center",
       justifyContent: "space-between",
-      width: "900px",
     },
 
-    icon: {},
+    headerNav: {
+      color: "white",
+      textDecoration: "none",
+      lineHeight: 50,
+      padding: "0 20px",
+      fontSize: "20px",
+      "&:hover": {
+        color: "purple",
+      },
+    },
+
+    icon: {
+      color: "white !important",
+    },
   };
 });

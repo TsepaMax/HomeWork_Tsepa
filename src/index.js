@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { MessageList } from "./components";
-import { ChatList } from "./components";
+import { ChatPage, ProfilePage, HomePage } from "./pages";
 import { Header } from "./components";
 import "./palette.css";
 
@@ -17,11 +17,16 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Header />
-      <div className="wrap-content">
-        <ChatList />
-        <MessageList />
-      </div>
+      <BrowserRouter>
+        <div className="conteiner">
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/chat/*" element={<ChatPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
