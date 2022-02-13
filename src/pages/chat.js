@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { ChatList, MessageList } from "../components";
 import { useStyles } from "./use-styles";
@@ -6,6 +6,21 @@ import { useStyles } from "./use-styles";
 export const ChatPage = () => {
   const styles = useStyles();
   const navigate = useNavigate();
+  const [chats] = useState(["room1", "room2", "room3"]);
+
+  /*   const [messages, setMessages] = useState({});
+
+  function sendMessage(roomId, autor, value) {
+    if (value) {
+      setMessages({
+        ...messages,
+        [roomId]: [
+          ...(messages[roomId] ?? []),
+          { author: autor, message: value, date: new Date() },
+        ],
+      });
+    }
+  } */
 
   useEffect(() => {
     const listener = ({ code }) => {
@@ -23,7 +38,7 @@ export const ChatPage = () => {
         path="/"
         element={
           <div className={styles.chatListWrap}>
-            <ChatList />
+            <ChatList chats={chats} />
             <div>
               <p className={styles.chatListStarter}>Выберите чат</p>
             </div>
@@ -34,8 +49,8 @@ export const ChatPage = () => {
         path="/:roomId"
         element={
           <div className={styles.chatListWrap}>
-            <ChatList />
-            <MessageList />
+            <ChatList chats={chats} />
+            <MessageList /* messages={messages} sendMessage={sendMessage} */ />
           </div>
         }
       />

@@ -5,7 +5,7 @@ export const useStyles = makeStyles((ctx) => {
     chatListStarter: {
       fontSize: "23px",
       paddingLeft: "25px",
-      color: "#00d8ff",
+      color: "#099",
     },
 
     homePageWrap: {
@@ -36,6 +36,12 @@ export const useStyles = makeStyles((ctx) => {
       animation: "show 3s 1",
       animationFillMode: "forwards",
       animationDelay: "2s",
+      "&:hover": {
+        color: "white",
+        backgroundColor: "#00d8ff",
+        border: "1px solid grey",
+        boxShadow: "0 2px 3px grey",
+      },
     },
 
     chatListWrap: {

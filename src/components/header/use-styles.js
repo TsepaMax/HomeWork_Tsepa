@@ -18,8 +18,10 @@ export const useStyles = makeStyles((ctx) => {
       lineHeight: 50,
       padding: "0 20px",
       fontSize: "20px",
+      transition: "1s",
       "&:hover": {
         color: "purple",
+        transition: "1s",
       },
     },
 

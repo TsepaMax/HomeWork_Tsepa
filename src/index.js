@@ -24,6 +24,7 @@ ReactDOM.render(
             <Route path="/" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/chat/*" element={<ChatPage />} />
+            <Route path="*" element={<h2>404</h2>} />
           </Routes>
         </div>
       </BrowserRouter>

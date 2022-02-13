@@ -1,24 +1,8 @@
 import { makeStyles } from "@mui/styles";
-import backgroundImage from "../../img/chat-bg-4.jpg";
 
 export const useStyles = makeStyles((ctx) => {
   return {
-    wrapper: {
-      marginTop: "10px",
-      /* backgroundColor: "whitesmoke", */
-      backgroundImage: `url(${backgroundImage})`,
-      backgroundPosition: "right",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "end",
-      width: "inherit",
-      height: "inherit",
-      overflow: "auto",
-    },
-
-    /*     input: {
+    input: {
       color: "#00d8ff",
       padding: "10px 15px",
       fontSize: "15px",
@@ -37,7 +21,7 @@ export const useStyles = makeStyles((ctx) => {
         color: "#099",
         transition: "1s",
       },
-    }, */
+    },
   };
 });
 /* after {
