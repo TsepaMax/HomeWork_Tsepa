@@ -1,0 +1,28 @@
+/* :root {
+  --main-color: #2b5278;
+} */
+
+.conteiner {
+  margin: 20px 50px;
+  background-color: white;
+  box-shadow: 0 10px 20px lightseagreen;
+  height: 95vh;
+  min-width: 600px;
+}
+
+.Mui-selected {
+  /* Костыль конечно. Видел Как реализовано у Вас, хотел попробовать разобраться сам. Чуть позже продолжу) */
+  border: 1px solid grey !important;
+  background-color: #099 !important;
+  box-shadow: 0 2px 3px grey;
+  color: white !important;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
