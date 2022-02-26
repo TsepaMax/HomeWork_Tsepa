@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect /* , useState */ } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { ChatList, MessageList } from "../components";
 import { useStyles } from "./use-styles";
+import { useSelector } from "react-redux";
+import { chatsSelector } from "../store/chats/selectors";
 
 export const ChatPage = () => {
   const styles = useStyles();
   const navigate = useNavigate();
-  const [chats] = useState(["room1", "room2", "room3"]);
+  /* const [chats] = useState(["room1", "room2", "room3"]); */
+
+  const chats = useSelector(chatsSelector);
+  /* const dispatch = useDispatch(); */
 
   /*   const [messages, setMessages] = useState({});
 
