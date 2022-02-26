@@ -35,5 +35,10 @@ export const useStyles = makeStyles((ctx) => {
     avatar: {
       margin: "0 10px",
     },
+
+    delete: {
+      position: "absolute",
+      right: "5px",
+    },
   };
 });

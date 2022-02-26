@@ -1,18 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useStyles } from "./use-styles";
 import { showNameToggle } from "../store/profile/actions";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+import { profileSelector } from "../store/profile/selectors";
 
 export const ProfilePage = () => {
   const styles = useStyles();
-  const [upd, setUpd] = useState(0);
-
-  const { showName, name } = useSelector((state) => state);
+  const { showName, name } = useSelector(profileSelector);
   const dispatch = useDispatch();
 
   const toShowName = useCallback(() => {
     dispatch(showNameToggle);
-    setUpd((prevUpd) => prevUpd + 1);
   }, [dispatch]);
 
   return (

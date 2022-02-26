@@ -1,4 +1,3 @@
-import React, { useEffect, /* useRef, */ useState } from "react";
 import {
   /* Navigate, */ useParams /* , useNavigate */,
 } from "react-router-dom";
@@ -8,50 +7,60 @@ import { Message } from "./message";
 import { InputForm } from "./input";
 import { useStyles } from "./use-styles";
 import { AUTHORS } from "../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "../../store/messages/actions";
+import { useEffect } from "react";
+import { messsagesSelector } from "../../store/messages/selectors";
 
-export const MessageList = (/* { messages }, { sendMessage } */) => {
+export const MessageList = (/* { messages , sendMessage } */) => {
   const { roomId } = useParams();
   const styles = useStyles();
-  const [messages, setMessages] = useState({});
+  /* const [messages, setMessages] = useState({}); */
   /*   const navigate = useNavigate(); */
+
+  const messageList = useSelector(messsagesSelector);
+  const dispatch = useDispatch();
 
   function sendMessage(value) {
     if (value) {
-      setMessages({
+      dispatch(
+        addMessage(roomId, {
+          author: AUTHORS.USER,
+          message: value,
+          date: new Date(),
+        })
+      );
+      /*       setMessages({
         ...messages,
         [roomId]: [
           ...(messages[roomId] ?? []),
           { author: AUTHORS.USER, message: value, date: new Date() },
         ],
-      });
+      }); */
       /*       setValue(""); */
     }
   }
 
   useEffect(() => {
-    const roomMessages = messages[roomId] ?? [];
+    const roomMessages = messageList[roomId] ?? [];
     const lastMessage = roomMessages[roomMessages.length - 1];
     let timerId = null;
 
     if (roomMessages.length && lastMessage.author !== AUTHORS.BOT) {
       timerId = setTimeout(() => {
-        setMessages({
-          ...messages,
-          [roomId]: [
-            ...messages[roomId],
-            {
-              author: AUTHORS.BOT,
-              message: "Hello from bot",
-              date: new Date(),
-            },
-          ],
-        });
+        dispatch(
+          addMessage(roomId, {
+            author: AUTHORS.BOT,
+            message: "Hello from bot",
+            date: new Date(),
+          })
+        );
       }, 200);
     }
     return () => clearInterval(timerId);
-  }, [messages, roomId]);
+  }, [messageList, roomId, dispatch]);
 
-  const roomMessages = messages[roomId] ?? [];
+  const roomMessages = messageList[roomId] ?? [];
 
   /*   if () {
     return navigate("/chat");
