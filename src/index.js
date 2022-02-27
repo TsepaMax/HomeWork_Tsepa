@@ -6,7 +6,8 @@ import { ChatPage, ProfilePage, HomePage } from "./pages";
 import { Header } from "./components";
 import "./palette.css";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { persistor, store } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const theme = createTheme({
   palette: {
@@ -20,17 +21,19 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <BrowserRouter>
-          <div className="conteiner">
-            <Header />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/chat/*" element={<ChatPage />} />
-              <Route path="*" element={<h2>404</h2>} />
-            </Routes>
-          </div>
-        </BrowserRouter>
+        <PersistGate persistor={persistor}>
+          <BrowserRouter>
+            <div className="conteiner">
+              <Header />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/chat/*" element={<ChatPage />} />
+                <Route path="*" element={<h2>404</h2>} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,

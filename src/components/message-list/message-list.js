@@ -8,8 +8,10 @@ import { InputForm } from "./input";
 import { useStyles } from "./use-styles";
 import { AUTHORS } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addMessage } from "../../store/messages/actions";
-import { useEffect } from "react";
+import {
+  /* addMessage, */ addMessageWithThunk,
+} from "../../store/messages/actions";
+/* import { useEffect } from "react"; */
 import { messsagesSelector } from "../../store/messages/selectors";
 
 export const MessageList = (/* { messages , sendMessage } */) => {
@@ -24,7 +26,7 @@ export const MessageList = (/* { messages , sendMessage } */) => {
   function sendMessage(value) {
     if (value) {
       dispatch(
-        addMessage(roomId, {
+        addMessageWithThunk(roomId, {
           author: AUTHORS.USER,
           message: value,
           date: new Date(),
@@ -41,7 +43,7 @@ export const MessageList = (/* { messages , sendMessage } */) => {
     }
   }
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const roomMessages = messageList[roomId] ?? [];
     const lastMessage = roomMessages[roomMessages.length - 1];
     let timerId = null;
@@ -58,7 +60,7 @@ export const MessageList = (/* { messages , sendMessage } */) => {
       }, 200);
     }
     return () => clearInterval(timerId);
-  }, [messageList, roomId, dispatch]);
+  }, [messageList, roomId, dispatch]); */
 
   const roomMessages = messageList[roomId] ?? [];
 

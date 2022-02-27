@@ -9,9 +9,9 @@ export const Message = memo(({ message }) => {
     <div className={styles.wrapper}>
       <div className={styles.author}>{message.author}</div>
       <div className={styles.message}>{message.message}</div>
-      <div className={styles.date}>
+      {/*       <div className={styles.date}>
         {message.date.getHours()}:{message.date.getMinutes()}
-      </div>
+      </div> */}
     </div>
   );
 });
